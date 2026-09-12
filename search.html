@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dual-Sided Search List</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: white;
+      color: black;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    .container {
+      display: grid;
+      grid-template-columns: 1fr 2px 1fr;
+      gap: 20px;
+      width: 90%;
+      max-width: 1000px;
+    }
+    .left, .right {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-height: 80vh;
+      overflow-y: auto;
+      padding: 10px;
+    }
+    .separator {
+      background: black;
+      width: 2px;
+    }
+    .field {
+      border: 1px solid black;
+      padding: 5px;
+    }
+    input {
+      margin-bottom: 10px;
+      width: 50%;
+      padding: 5px;
+      border: 1px solid black;
+    }
+    .item {
+      border-bottom: 1px solid black;
+      padding: 5px 0;
+      font-size: 0.9rem;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <h1>Dual-Sided Search</h1>
+  <input type="text" id="search" placeholder="Search items..." onkeyup="filterList()">
+  <div class="container">
+    <div class="left" id="leftList">
+      <div class="item">100 Table Clean Service 1 98.99</div>
+      <div class="item">101 18V Cordless Drill 2 89.99</div>
+      <div class="item">102 6-inch Wood Clamp 4 12.50</div>
+      <div class="item">103 Carpenter's Hammer 1 19.99</div>
+      <div class="item">104 Adjustable Wrench Set 1 34.99</div>
+      <div class="item">105 Box of Drywall Screws 3 7.49</div>
+      <div class="item">106 Laser Distance Measurer 1 59.95</div>
+      <div class="item">107 Heavy Duty Tape Measure 2 14.25</div>
+      <div class="item">108 4-Foot Level Tool 1 24.99</div>
+      <div class="item">109 12V Cordless Impact Driver 1 109.00</div>
+      <div class="item">110 Precision Screwdriver Set 1 15.49</div>
+      <div class="item">111 Safety Goggles 3 9.99</div>
+      <div class="item">112 Work Gloves 2 6.99</div>
+      <div class="item">113 Power Extension Cord 1 18.75</div>
+      <div class="item">114 Circular Saw Blade 2 25.00</div>
+      <div class="item">115 Carpenter's Square 1 14.00</div>
+      <div class="item">116 Wood Chisel Set 1 27.50</div>
+      <div class="item">117 Cordless Jigsaw 1 89.00</div>
+      <div class="item">118 Paint Roller Kit 2 12.99</div>
+      <div class="item">119 Electric Sander 1 74.50</div>
+      <div class="item">120 Utility Knife 3 5.49</div>
+      <div class="item">121 Dust Mask 5 8.25</div>
+      <div class="item">122 Angle Grinder 1 99.99</div>
+      <div class="item">123 Folding Workbench 1 129.00</div>
+      <div class="item">124 Claw Hammer 1 17.99</div>
+      <div class="item">125 Sawhorse Pair 1 45.00</div>
+    </div>
+  
+    <div class="separator"></div>
+    <div class="right" id="rightList">
+      <div class="item">100 Table Clean Service 1 98.99</div>
+      <div class="item">101 18V Cordless Drill 2 89.99</div>
+      <div class="item">102 6-inch Wood Clamp 4 12.50</div>
+      <div class="item">103 Carpenter's Hammer 1 19.99</div>
+      <div class="item">104 Adjustable Wrench Set 1 34.99</div>
+      <div class="item">105 Box of Drywall Screws 3 7.49</div>
+      <div class="item">106 Laser Distance Measurer 1 59.95</div>
+      <div class="item">107 Heavy Duty Tape Measure 2 14.25</div>
+      <div class="item">108 4-Foot Level Tool 1 24.99</div>
+      <div class="item">109 12V Cordless Impact Driver 1 109.00</div>
+      <div class="item">110 Precision Screwdriver Set 1 15.49</div>
+      <div class="item">111 Safety Goggles 3 9.99</div>
+      <div class="item">112 Work Gloves 2 6.99</div>
+      <div class="item">113 Power Extension Cord 1 18.75</div>
+      <div class="item">114 Circular Saw Blade 2 25.00</div>
+      <div class="item">115 Carpenter's Square 1 14.00</div>
+      <div class="item">116 Wood Chisel Set 1 27.50</div>
+      <div class="item">117 Cordless Jigsaw 1 89.00</div>
+      <div class="item">118 Paint Roller Kit 2 12.99</div>
+      <div class="item">119 Electric Sander 1 74.50</div>
+      <div class="item">120 Utility Knife 3 5.49</div>
+      <div class="item">121 Dust Mask 5 8.25</div>
+      <div class="item">122 Angle Grinder 1 99.99</div>
+      <div class="item">123 Folding Workbench 1 129.00</div>
+      <div class="item">124 Claw Hammer 1 17.99</div>
+      <div class="item">125 Sawhorse Pair 1 45.00</div>
+    </div>
+  </div>  
+
+  <div class="bottom" id="fieldList">
+      <div class="field"><strong>Field Name</strong> – <strong>Description</strong> – <strong>Format</strong> – <strong>Remarks</strong></div>
+      <div class="field">LINENO – Line Number – I9999 – Line number as on DATASOURCE-A</div>
+      <div class="field">DESC – Description – Alphanumeric – Item or Service description</div>
+      <div class="field">HOUR – Service Duration – hhmm – Time taken to complete the service</div>
+      <div class="field">QTY – Quantity – NNN – Quantity</div>
+      <div class="field">VAL – Value – R99999.99 – Value</div>
+  </div>
+
+  <script>
+    function filterList() {
+      const input = document.getElementById('search').value.toLowerCase();
+
+      // Get both lists of items
+      const leftItems = document.querySelectorAll('#leftList .item');
+      const rightItems = document.querySelectorAll('#rightList .item');
+
+      [...leftItems, ...rightItems].forEach(item => {
+        const text = item.textContent.toLowerCase();
+        item.style.display = text.includes(input) ? '' : 'none';
+      });
+    }
+  </script>
+</body>
+</html>
